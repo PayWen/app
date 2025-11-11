@@ -531,3 +531,128 @@ Payment verified: confirmed
 ---
 
 The PayWen SDK simplifies API communication, authentication, and wallet management, enabling seamless paywall integration across web and mobile applications.
+
+## Advanced Integrations
+
+PayWen can be connected to backend servers, on-chain listeners, or AI agents for advanced automation and dynamic paywalls.
+
+---
+
+### 1. Webhook Notifications
+
+PayWen can send a webhook when a payment is completed.  
+This allows you to unlock content, grant access, or update user data in real time.
+
+**Example Payload**
+
+```json
+{
+  "event": "payment.confirmed",
+  "data": {
+    "transactionId": "txn_6b912f",
+    "paywallId": "pw_3d214c",
+    "amount": 2.99,
+    "currency": "USDC",
+    "timestamp": "2025-11-11T11:18:00Z"
+  }
+}
+```
+
+**Example Express.js Webhook Receiver**
+
+```javascript
+// webhook.js
+
+import express from 'express'
+const app = express()
+app.use(express.json())
+
+app.post('/webhook/paywen', (req, res) => {
+  const { event, data } = req.body
+
+  if (event === 'payment.confirmed') {
+    console.log('Payment confirmed for', data.paywallId)
+    // Unlock content, grant access, or update user records
+  }
+
+  res.sendStatus(200)
+})
+
+app.listen(4000, () => console.log('Webhook listening on port 4000'))
+```
+
+---
+
+### 2. On-Chain Event Listener (Solana)
+
+Developers can monitor Solana events directly to track wallet balances or verify transactions on-chain.
+
+#### TypeScript Example
+
+```typescript
+// solana-listener.ts
+
+import { Connection, PublicKey } from '@solana/web3.js'
+
+const connection = new Connection('https://api.mainnet-beta.solana.com')
+const walletAddress = new PublicKey('4GxHkBdwzsuPXQnPc6yR8vCk4eAqH7MwDsEYpBGuwB6T')
+
+connection.onAccountChange(walletAddress, accountInfo => {
+  console.log('Wallet updated:', accountInfo.lamports / 1e6, 'USDC')
+})
+```
+
+---
+
+### 3. AI Agent Integration
+
+AI agents can interact with PayWen using the x402 protocol.  
+This allows autonomous AI applications to purchase gated data, APIs, or services automatically.
+
+#### Example Flow
+
+```text
+1. Agent identifies a PayWen paywall URL
+2. Agent requests a payment challenge from PayWen
+3. Agent signs and submits the transaction using its wallet
+4. PayWen validates payment and returns the gated content
+```
+
+#### Example (Simplified Pseudocode)
+
+```javascript
+const paywallUrl = 'https://paywen.app/pw_5c91e2'
+const challenge = await fetch(`${paywallUrl}/challenge`)
+const tx = await aiWallet.pay(challenge)
+const content = await fetch(`${paywallUrl}/content?proof=${tx.hash}`)
+console.log('Unlocked content:', await content.text())
+```
+
+---
+
+### 4. Custom Pricing and Dynamic Paywalls
+
+Developers can create dynamic pricing models by connecting PayWen’s API to external data sources.
+
+**Example: Price Adjusted by Market Data**
+
+```javascript
+const price = await fetch('https://api.coinbase.com/v2/prices/SOL-USD/spot')
+  .then(r => r.json())
+  .then(d => d.data.amount / 10)
+
+await fetch('https://api.paywen.app/v1/paywalls', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer YOUR_API_KEY' },
+  body: JSON.stringify({
+    url: 'https://example.com/report',
+    price,
+    currency: 'USDC',
+    title: 'Market Data Report'
+  })
+})
+```
+
+---
+
+PayWen’s infrastructure supports advanced integrations with APIs, smart contracts, or AI systems through secure and verifiable payment logic.
