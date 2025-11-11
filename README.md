@@ -117,3 +117,84 @@ Paywall created: https://paywen.dev/abc123
 ```
 
 Once your paywall is live, visitors can pay using any crypto, and your wallet receives USDC within 2–5 seconds.
+
+## How It Works
+
+Understanding the complete payment flow from paywall creation to content access.
+
+---
+
+### Payment Flow
+
+```text
+1. Visitor clicks Paywall Link
+   They see a "Pay to Unlock" modal displaying the price and available payment methods.
+
+2. Payment with Any Crypto
+   The visitor pays using their preferred cryptocurrency. Daimo Pay automatically converts all payments to USDC on Solana.
+
+3. On-Chain Confirmation
+   Transaction settles on Solana in 2–5 seconds. USDC appears instantly in your wallet.
+
+4. Content Unlocked
+   The visitor is redirected to your original URL and can access the content.
+```
+
+---
+
+### Wallet Creation
+
+When you create your first paywall, PayWen automatically generates a non-custodial smart wallet secured by your passkey.  
+This happens seamlessly in the background.
+
+```text
+• Passkey created using your device's biometric authentication  
+• Smart wallet deployed on Solana  
+• You maintain full control — PayWen never has access to your funds
+```
+
+---
+
+### Example: Retrieve Wallet and Check Balance
+
+Below is a sample implementation using the PayWen SDK.
+
+#### TypeScript Example
+
+```typescript
+// wallet-example.ts
+
+import { PayWenWallet } from '@paywen/sdk'
+
+async function main() {
+  const wallet = await PayWenWallet.connect()
+  const balance = await wallet.getBalance()
+  console.log('Wallet balance:', balance, 'USDC')
+}
+
+main()
+```
+
+#### JavaScript Example
+
+```javascript
+// wallet-example.js
+
+import { PayWenWallet } from '@paywen/sdk'
+
+const wallet = await PayWenWallet.connect()
+const balance = await wallet.getBalance()
+console.log('Wallet balance:', balance, 'USDC')
+```
+
+---
+
+### Example Output
+
+```bash
+Wallet balance: 24.87 USDC
+```
+
+---
+
+PayWen uses passkey authentication for wallet security, ensuring private keys never leave your device and cannot be intercepted.
