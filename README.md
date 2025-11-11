@@ -656,3 +656,72 @@ await fetch('https://api.paywen.app/v1/paywalls', {
 ---
 
 PayWen’s infrastructure supports advanced integrations with APIs, smart contracts, or AI systems through secure and verifiable payment logic.
+
+## Security and Compliance
+
+PayWen is built for enterprise-grade reliability using Coinbase CDP infrastructure and Solana’s high-speed consensus.
+
+---
+
+### Security Principles
+
+```text
+• Non-custodial architecture: PayWen cannot access user wallets or private keys  
+• End-to-end encryption for all client-server communication  
+• Passkey authentication ensures secure, phishing-resistant access  
+• On-chain verification for all transactions using Solana’s public ledger  
+• No sensitive user data stored or transmitted in plain text
+```
+
+---
+
+### Data Protection
+
+All PayWen traffic is encrypted using TLS 1.3 and routed through verified CDP endpoints.  
+Transaction data and wallet metadata are stored only in ephemeral memory for verification.  
+Once a payment is confirmed, all sensitive information is discarded.
+
+```text
+• No password storage  
+• No custodial control  
+• All wallet logic executed client-side
+```
+
+---
+
+### Solana Network Verification
+
+PayWen uses Solana’s on-chain state to verify every transaction in real time.  
+Developers can cross-check payments manually through the Solana Explorer.
+
+**Example**
+
+```bash
+https://explorer.solana.com/tx/4GxHkBdwzsuPXQnPc6yR8vCk4eAqH7MwDsEYpBGuwB6T
+```
+
+This guarantees that every confirmed transaction is publicly auditable and cryptographically verified.
+
+---
+
+### Coinbase CDP Integration
+
+PayWen leverages Coinbase CDP (Developer Platform) for:
+
+```text
+• Wallet orchestration and signing  
+• Fiat conversion and settlement  
+• Secure custody management  
+• Institutional-grade reliability
+```
+
+This ensures transactions are protected by the same infrastructure used by Coinbase itself.
+
+---
+
+### Responsible Disclosure
+
+If you discover a security issue, please report it privately to the PayWen security team:  
+`security@paywen.app`
+
+Responsible disclosure helps maintain user safety and platform integrity.
