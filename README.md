@@ -287,3 +287,89 @@ Withdrawal successful: 4GxHkBdwzsuPXQnPc6yR8vCk4eAqH7MwDsEYpBGuwB6T
 ---
 
 PayWen wallets are powered by Coinbase CDP infrastructure, ensuring reliability and enterprise-grade security.
+
+## Passkey Authentication
+
+PayWen uses WebAuthn-based passkeys for secure, passwordless authentication.  
+Each wallet is protected by a unique cryptographic key pair stored in the device's secure enclave.  
+Authentication happens entirely locally and never exposes private data to the server.
+
+---
+
+### Why Passkeys
+
+```text
+• Eliminate passwords entirely  
+• Use Face ID, Touch ID, or device PIN  
+• Resistant to phishing and credential theft  
+• Keys are bound to the device and cannot be exported
+```
+
+---
+
+### How It Works
+
+```text
+1. User creates a wallet  
+   A WebAuthn key pair is generated locally on the device.
+
+2. Authentication  
+   When logging in, the private key signs a cryptographic challenge locally.
+
+3. Verification  
+   The signed challenge is verified by PayWen’s backend using the registered public key.
+
+4. Result  
+   Access is granted and the user’s wallet is unlocked for transactions.
+```
+
+---
+
+### Example: Authenticate with Passkey
+
+#### TypeScript Example
+
+```typescript
+// authenticate.ts
+
+import { PayWenAuth } from '@paywen/sdk'
+
+async function main() {
+  const session = await PayWenAuth.authenticate({
+    challenge: 'random_challenge_string'
+  })
+
+  console.log('Authentication successful:', session.userId)
+}
+
+main()
+```
+
+---
+
+#### JavaScript Example
+
+```javascript
+// authenticate.js
+
+import { PayWenAuth } from '@paywen/sdk'
+
+const session = await PayWenAuth.authenticate({
+  challenge: 'random_challenge_string'
+})
+
+console.log('Authentication successful:', session.userId)
+```
+
+---
+
+### Example Output
+
+```bash
+Authentication successful: user_91b3c4a7
+```
+
+---
+
+Passkeys combine biometric verification with cryptographic signing to secure wallets without storing private keys online.  
+This ensures that even if the PayWen servers were compromised, user wallets and authentication keys remain safe.
