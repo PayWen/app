@@ -373,3 +373,161 @@ Authentication successful: user_91b3c4a7
 
 Passkeys combine biometric verification with cryptographic signing to secure wallets without storing private keys online.  
 This ensures that even if the PayWen servers were compromised, user wallets and authentication keys remain safe.
+
+## API and SDK Reference
+
+PayWen offers both a REST API and an official SDK to integrate paywalls, wallets, and authentication into any application.
+
+---
+
+### Base URL
+
+```bash
+https://api.paywen.app/v1
+```
+
+---
+
+### Authentication
+
+All API requests require a valid API key in the header.
+
+```bash
+Authorization: Bearer YOUR_API_KEY
+```
+
+You can generate or manage keys in your dashboard at  
+[https://paywen.app/dashboard](https://paywen.app/dashboard)
+
+---
+
+## REST API
+
+### 1. Create a Paywall
+
+**Endpoint**
+
+```bash
+POST /v1/paywalls
+```
+
+**Example Request**
+
+```bash
+curl -X POST https://api.paywen.app/v1/paywalls \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer YOUR_API_KEY" \
+-d '{
+  "url": "https://example.com/premium",
+  "price": 4.99,
+  "currency": "USDC",
+  "title": "Exclusive Content"
+}'
+```
+
+**Example Response**
+
+```json
+{
+  "paywallId": "pw_92a1c3d7",
+  "url": "https://paywen.app/pw_92a1c3d7",
+  "status": "active"
+}
+```
+
+---
+
+### 2. Verify Payment
+
+**Endpoint**
+
+```bash
+GET /v1/payments/:id
+```
+
+**Example Request**
+
+```bash
+curl https://api.paywen.app/v1/payments/txn_04be1e \
+-H "Authorization: Bearer YOUR_API_KEY"
+```
+
+**Example Response**
+
+```json
+{
+  "transactionId": "txn_04be1e",
+  "amount": 4.99,
+  "currency": "USDC",
+  "status": "confirmed",
+  "timestamp": "2025-11-11T10:42:00Z"
+}
+```
+
+---
+
+## SDK Reference
+
+### Installation
+
+```bash
+npm install @paywen/sdk
+```
+
+---
+
+### Importing the SDK
+
+#### TypeScript Example
+
+```typescript
+import { createPaywall, verifyPayment, PayWenWallet } from '@paywen/sdk'
+```
+
+#### JavaScript Example
+
+```javascript
+import { createPaywall, verifyPayment, PayWenWallet } from '@paywen/sdk'
+```
+
+---
+
+### Example: Verify a Payment
+
+#### TypeScript Example
+
+```typescript
+// verify-payment.ts
+
+import { verifyPayment } from '@paywen/sdk'
+
+async function main() {
+  const payment = await verifyPayment('txn_04be1e')
+  console.log('Payment verified:', payment.status)
+}
+
+main()
+```
+
+#### JavaScript Example
+
+```javascript
+// verify-payment.js
+
+import { verifyPayment } from '@paywen/sdk'
+
+const payment = await verifyPayment('txn_04be1e')
+console.log('Payment verified:', payment.status)
+```
+
+---
+
+### Example Output
+
+```bash
+Payment verified: confirmed
+```
+
+---
+
+The PayWen SDK simplifies API communication, authentication, and wallet management, enabling seamless paywall integration across web and mobile applications.
