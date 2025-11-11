@@ -30,4 +30,90 @@ You own your wallet. You own your earnings.
 
 ### Documentation
 
-Full documentation is available at: [https://paywen.app/docs](https://paywen.app/docs)
+Full documentation is available at: [https://paywen.dev/docs](https://paywen.dev/docs)
+
+## Quick Start
+
+Get started with PayWen in three simple steps. No account creation or setup required.
+
+### 1. Input Your Webpage
+
+Paste any URL you want to monetize. Works with articles, videos, research papers, courses, and any other web content.
+
+```bash
+https://example.com/article
+```
+
+### 2. Set Your Price
+
+Choose how much your content is worth. You can select from preset options or set a custom price.
+
+```bash
+$0.99   $2.99   $4.99   Custom
+```
+
+### 3. Share Your Link
+
+Once created, PayWen gives you a unique paywall link. Share it anywhere.
+
+```bash
+paywen.dev/abc123
+```
+
+---
+
+## Example: Creating a Paywall Programmatically
+
+Developers can create paywalls directly through the API.  
+Below are examples in JavaScript and TypeScript.
+
+### JavaScript Example
+
+```javascript
+// create-paywall.js
+
+const response = await fetch('https://api.paywen.dev/v1/paywalls', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    url: 'https://example.com/premium-article',
+    price: 2.99,
+    currency: 'USDC',
+    title: 'Premium Article Access'
+  })
+})
+
+const { paywallId, paywallUrl } = await response.json()
+console.log('Paywall created:', paywallUrl)
+```
+
+### TypeScript Example
+
+```typescript
+// create-paywall.ts
+
+import { createPaywall } from '@paywen/sdk'
+
+async function main() {
+  const paywall = await createPaywall({
+    url: 'https://example.com/premium-article',
+    price: 2.99,
+    currency: 'USDC',
+    title: 'Premium Article Access'
+  })
+
+  console.log('Paywall created:', paywall.url)
+}
+
+main()
+```
+
+---
+
+### Example Output
+
+```bash
+Paywall created: https://paywen.dev/abc123
+```
+
+Once your paywall is live, visitors can pay using any crypto, and your wallet receives USDC within 2–5 seconds.
