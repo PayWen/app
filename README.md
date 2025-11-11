@@ -725,3 +725,19 @@ If you discover a security issue, please report it privately to the PayWen secur
 `security@paywen.app`
 
 Responsible disclosure helps maintain user safety and platform integrity.
+
+---
+
+### Project Status
+
+PayWen is actively maintained and open for community contributions.  
+For updates and documentation, visit [https://paywen.dev/docs](https://paywen.dev/docs)
+
+---
+
+### Maintainers
+
+**PayWen Core Team**  
+Built on Solana and powered by Coinbase CDP.
+
+Contact: `contact@paywen.dev`
