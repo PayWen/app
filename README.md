@@ -198,3 +198,92 @@ Wallet balance: 24.87 USDC
 ---
 
 PayWen uses passkey authentication for wallet security, ensuring private keys never leave your device and cannot be intercepted.
+
+## Non-Custodial Wallets
+
+PayWen uses non-custodial smart wallets deployed on Solana.  
+Each wallet is secured by a passkey generated on your device and protected by biometric authentication.  
+Your private keys never leave your device.
+
+---
+
+### Key Features
+
+```text
+• Passkey-secured smart wallet  
+• No custodial access or withdrawal permissions  
+• Funds cannot be frozen or seized  
+• Withdraw anytime to any Ethereum-compatible address
+```
+
+---
+
+## Withdrawing Funds
+
+You can withdraw your USDC earnings to any external address in just a few seconds.
+
+### Steps
+
+```text
+1. Authenticate with your passkey (Face ID, Touch ID, or device PIN)
+2. Enter the destination Ethereum address
+3. Specify the amount to withdraw
+4. Confirm the transaction
+5. Funds arrive within 2–5 seconds
+```
+
+---
+
+### TypeScript Example
+
+```typescript
+// withdraw.ts
+
+import { PayWenWallet } from '@paywen/sdk'
+
+async function main() {
+  const wallet = await PayWenWallet.connect()
+
+  const tx = await wallet.withdraw({
+    to: '0x7423A6C65304C35B32925a3b8448c9e759fbf0EB',
+    amount: 10.00, // in USDC
+    network: 'solana'
+  })
+
+  console.log('Withdrawal successful:', tx.hash)
+}
+
+main()
+```
+
+---
+
+### JavaScript Example
+
+```javascript
+// withdraw.js
+
+import { PayWenWallet } from '@paywen/sdk'
+
+const wallet = await PayWenWallet.connect()
+
+const tx = await wallet.withdraw({
+  to: '0x7423A6C65304C35B32925a3b8448c9e759fbf0EB',
+  amount: 10.00,
+  network: 'solana'
+})
+
+console.log('Withdrawal successful:', tx.hash)
+```
+
+---
+
+### Example Output
+
+```bash
+Withdrawal successful: 4GxHkBdwzsuPXQnPc6yR8vCk4eAqH7MwDsEYpBGuwB6T
+```
+
+---
+
+PayWen wallets are powered by Coinbase CDP infrastructure, ensuring reliability and enterprise-grade security.
