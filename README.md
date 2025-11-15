@@ -740,3 +740,4 @@ For updates and documentation, visit [https://paywen.dev/docs](https://paywen.de
 **PayWen Core Team**  
 Built on Solana and powered by Coinbase CDP.
 Contact: `contact@paywen.dev`
+Official Token: BQ21rndyNYDgVBHwFu8CXyGJ3WEe2hESu8DvcLFepump
